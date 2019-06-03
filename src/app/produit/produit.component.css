@@ -1,0 +1,29 @@
+.spacerhaut{
+  margin-top:20px;
+}
+.cursor{
+  cursor:pointer
+}
+mat-grid-tile {
+  background: lightblue;
+}
+.esp{
+   margin-right:0px;
+ }
+.esp-bat{
+  margin-bottom:10px;
+}
+.spacer-card{
+   margin-top: 10px;
+  width: 1080px;
+ }
+
+.img-1 {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+.espace-bas{
+  margin-bottom: 80px;
+
+}

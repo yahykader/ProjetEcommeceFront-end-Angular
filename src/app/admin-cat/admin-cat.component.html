@@ -1,0 +1,62 @@
+<mat-card class="container spacerhaut espace-bottom row col-md-12">
+  <mat-card >  <mat-card-title>Gestion des Categories</mat-card-title></mat-card>
+  <mat-card-content class="spacerhaut">
+              <div class="espace-bat">
+
+                  <button mat-flat-button color="primary" (click)="onNewCategorie(c)">Add Category</button>
+
+              </div>
+        <!--pour ajouter categories-->
+        <div *ngIf="mode=='newCategorie'" class="col-md-6">
+          <form #f="ngForm" (ngSubmit)="onSaveCategorie(f.value)">
+            <div class="form-group">
+              <label class="control-label"> Nom Categorie </label>
+              <input type="text" name="nomCategorie" class="form-control" ngModel  [(ngModel)]="nomCategorie">
+              <label class="control-label"> description </label>
+              <input type="text" name="description" class="form-control" ngModel  [(ngModel)]="description">
+            </div>
+            <button type="submit" class=" btn btn-success" [disabled]="!f.valid"> Ajouter </button>
+
+          </form>
+        </div>
+        <!--pour modifier categories-->
+        <div *ngIf="mode=='editCategorie'" class="col-md-6">
+          <form #f="ngForm" (ngSubmit)="onUpdateCategorie(f.value)">
+            <div class="form-group">
+            <label class="control-label"> Nom Categorie </label>
+            <input type="text" name="nomCategorie" class="form-control" ngModel [(ngModel)]="currentcategorie.nomCategorie">
+          </div>
+            <div class="form-group">
+              <label class="control-label"> Description </label>
+              <input type="text" name="description" class="form-control" ngModel [(ngModel)]="currentcategorie.description">
+            </div>
+            <button type="submit" class=" btn btn-success" [disabled]="!f.valid"> Modifier </button>
+          </form>
+        </div>
+
+        <div  class="container"*ngIf="mode == 'list'">
+           <div class="row col-md-10">
+          <table class="table table-hover" *ngIf="listCategorie">
+            <thead>
+                <tr>
+                  <td>Nom Categories</td><td>Description</td>
+                  <td>Photo</td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let c of listCategorie._embedded.categories">
+
+              <td>{{c.nomCategorie}}</td><td>{{c.description}}</td>
+              <td>{{c.nomPhoto}}</td>
+              <td>
+                <button mat-flat-button color="warn" (click)="onDeleteCat(c)">Delete</button>
+              </td>
+              <td>
+                <button mat-flat-button color="accent"  (click)="onEditCategories(c)">Edit</button>
+              </td>
+            </tr>
+            </tbody>
+          </table></div>
+        </div>
+  </mat-card-content>
+</mat-card>

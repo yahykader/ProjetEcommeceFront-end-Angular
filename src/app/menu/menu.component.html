@@ -1,0 +1,67 @@
+<div class="navbar-fixed-top">
+<mat-toolbar color="primary" >
+  <mat-toolbar-row>
+    <span>Site Ecommerce </span>
+
+    <button mat-button class="example-btn" (click)= "this.onSelectedProduit()">Accueil</button>
+    <button mat-button [matMenuTriggerFor]="menu1">Produit</button>
+    <mat-menu #menu1="matMenu">
+      <button mat-menu-item (click)= "this.onSelectedProduit()">Sectionnée </button>
+      <button mat-menu-item (click)= "this.onPromotionProduit()">Promotion </button>
+      <button mat-menu-item (click)= "this.onDisponibleProduit()">Disponible </button>
+    </mat-menu>
+
+    <button mat-button>Click me!</button>
+    <button mat-button>Click me!</button>
+
+
+
+    <button mat-button [matMenuTriggerFor]="menu2" *ngIf="authService.isAuthenticated()">Admin</button>
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item routerLink="/adminCat">Gestion Catégories </button>
+      <button mat-menu-item routerLink="/adminProd">Gestion Produits </button>
+      <button mat-menu-item >Gestion Utilisateurs </button>
+    </mat-menu>
+
+
+
+
+    <form #f="ngForm" (ngSubmit)="onGetSearch(f.value)" class="navbar-form"  >
+      <div class="input-group">
+        <input type="text" class="form-control" name="motCle"  ngModel required=""
+                           [(ngModel)]="motCle" size="60"  placeholder="Rechercher une marque, un produit, ..."/>
+            <div class="input-group-btn">
+              <button mat-button class="btn btn-default" type="submit">
+                <mat-icon class="glyphicon glyphicon-search"></mat-icon>
+              </button>
+            </div>
+      </div>
+    </form>
+
+    <button mat-button routerLink="/inscrire" ><mat-icon class="glyphicon glyphicon-user" ></mat-icon> S'inscrire</button>
+    <button mat-button><span class="glyphicon glyphicon-shopping-cart"></span> Panier</button>
+
+    <button mat-button  *ngIf="!isAuthenticated()" routerLink="/login">
+       <mat-icon class="glyphicon glyphicon-log-in"></mat-icon> Login
+    </button>
+
+    <button mat-button *ngIf="this.isAuthenticated()" class="cursor" (click)="onLogout()">
+              <mat-icon class="glyphicon glyphicon-log-out"></mat-icon> Logout
+    </button>
+
+
+    <span class="example-spacer"></span>
+
+    <mat-icon class="example-icon" [matMenuTriggerFor]="menu"> menu</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>alow </button>
+      <button mat-menu-item>allow </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+</div>
+
+
+
+

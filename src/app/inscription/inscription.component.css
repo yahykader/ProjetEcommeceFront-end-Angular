@@ -1,0 +1,21 @@
+
+.example-container {
+
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-container > * {
+  width: 100%;
+}
+.spacer-card{
+  margin-top: 60px;
+}
+.espace-bottom{
+
+  margin-bottom: 150px;
+}
+.espace{
+  margin-top: 40px;
+}

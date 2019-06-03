@@ -1,0 +1,129 @@
+<mat-card class=" spacerhaut espace-bottom row col-md-18">
+  <mat-card >  <mat-card-title color="red">Gestion des Produits</mat-card-title></mat-card>
+  <mat-card-content class="spacerhaut">
+  <div class="espace-bat">
+
+      <button mat-flat-button color="primary" (click)="onNewProduit(p)">Add Product</button>
+
+    </div>
+<!--        pour ajouter produits-->
+   <div *ngIf="mode=='newProduit'" class="col-md-6">
+     <form #f="ngForm" (ngSubmit)="onSaveProduit(f.value)">
+         <div class="espace">
+           <mat-form-field class="example-full-width">
+             <input matInput placeholder="nom produit" type="text" name="nom" ngModel="" required="required">
+           </mat-form-field>
+         </div>
+           <mat-form-field class="example-full-width">
+             <textarea matInput placeholder="Description produit " type="text" name="description" ngModel="" required="required"></textarea>
+           </mat-form-field>
+
+
+           <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="quantité" type="number" name="quantite" ngModel  [(ngModel)]="quantite" required="required">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="prix" type="text" name="prix" ngModel  [(ngModel)]="prix" required="required">
+                  </mat-form-field>
+                </td>
+              </tr>
+           </table>
+           <table class="example-full-width" cellspacing="0">
+             <tr>
+                <td>
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin"  type="chekbox" [(ngModel)]="disabled" [value]="" >Selected</mat-checkbox>
+                  </section>
+                </td>
+                 <td>
+                   <section class="example-section">
+                     <mat-checkbox class="example-margin" [(ngModel)]="disabled" [value]="" >Promotion</mat-checkbox>
+                   </section>
+                 </td>
+                  <td>
+                    <section class="example-section">
+                       <mat-checkbox class="example-margin" [(ngModel)]="disabled" [value]="" >Disponible</mat-checkbox>
+                     </section>
+                  </td>
+               </tr>
+           </table>
+       <table class="example-full-width" cellspacing="0">
+         <tr>
+           <td>
+             <mat-form-field class="example-full-width">
+               <input matInput placeholder="nom photo" type="text" name="photo" ngModel="" required="required">
+             </mat-form-field>
+           </td>
+           <td>
+             <mat-form-field>
+               <mat-label>Nom Categorie</mat-label>
+               <mat-select [(ngModel)]="categorie" name="categorie" required="required">
+                 <mat-option *ngFor="let c of listCategories._embedded.categories" [value]="c.idCategorie">
+                       {{c.nomCategorie}}
+                 </mat-option>
+               </mat-select>
+             </mat-form-field>
+           </td>
+         </tr>
+       </table>
+
+
+         <div class="espace">
+           <button type="submit" class="btn btn-success center-block">Authentifier</button>
+         </div>
+       </form>
+   </div>
+    <!--pour modifier categories&ndash;&gt;
+   <div *ngIf="mode=='editCategorie'" class="col-md-6">
+     <form #f="ngForm" (ngSubmit)="onUpdateCategorie(f.value)">
+       <div class="form-group">
+         <label class="control-label"> Nom Categorie </label>
+         <input type="text" name="nomCategorie" class="form-control" ngModel [(ngModel)]="currentcategorie.nomCategorie">
+       </div>
+       <div class="form-group">
+         <label class="control-label"> Description </label>
+         <input type="text" name="description" class="form-control" ngModel [(ngModel)]="currentcategorie.description">
+       </div>
+       <button type="submit" class=" btn btn-success"> Modifier </button>
+     </form>
+   </div>-->
+
+    <div  class="container"*ngIf="mode == 'list'">
+      <div class="row col-md-6">
+        <table class="table table-hover" *ngIf="listProduits">
+          <thead>
+          <tr>
+            <td>Id</td>
+            <td>Nom Produit</td><td>Description</td>
+            <td>Quantité</td><td>Prix</td>
+            <td>Selected</td><td>Disponible</td>
+            <td>Promotion</td><td>Catégorie</td>
+            <td>Photo</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of listProduits._embedded.produits">
+            <td>{{p.idProduit}}</td>
+            <td>{{p.nom}}</td><td>{{p.description}}</td>
+            <td>{{p.quantite}}</td><td>{{p.prix}}</td>
+            <td>{{p.selected}}</td><td>{{p.disponible}}</td>
+            <td>{{p.promotion}}</td><td>{{p.categorie}}</td>
+            <td>{{p.photo}}</td>
+            <td>
+              <button mat-flat-button color="warn" (click)="onDeleteProd(p)">Delete</button>
+            </td>
+            <td>
+              <button mat-flat-button color="accent"  (click)="onEditProduit(p)">Edit</button>
+            </td>
+          </tr>
+          </tbody>
+        </table></div>
+    </div>
+  </mat-card-content>
+</mat-card>
+

@@ -1,0 +1,40 @@
+<div class="container col-md-8  col-md-offset-3 col-xs-12 spacer-card espace-bottom">
+  <div class="panel panel-default">
+
+    <mat-card>
+      <mat-card-title class="text-center"> Authentification</mat-card-title>
+    </mat-card>
+
+
+    <div class="container espace">
+				    <span class="text-danger">
+				              Incorrect username  or password ?
+				    </span>
+
+            <span class="text-danger">
+                           Vous avez été déconnecté
+            </span>
+    </div>
+    <div class="panel-body">
+
+      <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+        <div class="espace">
+          <mat-form-field class="example-container">
+            <input matInput placeholder="Login" type="text" name="userName" ngModel="" required="required">
+          </mat-form-field>
+        </div>
+        <div class="espace">
+        <mat-form-field class="example-container">
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                 type="password" name="password" ngModel="" required="required">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        </div>
+        <div class="espace">
+          <button type="submit" class="btn btn-success center-block">Authentifier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br><br>
+</div>

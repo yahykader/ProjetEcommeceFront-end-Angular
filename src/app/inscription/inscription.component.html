@@ -1,0 +1,50 @@
+<div class="container col-md-8  col-md-offset-3 col-xs-12 spacer-card espace-bottom">
+  <div class="panel panel-default">
+
+    <mat-card>
+      <mat-card-title class="text-center"> Inscription</mat-card-title>
+    </mat-card>
+
+
+    <div class="container espace">
+				    <span class="text-danger">
+
+				    </span>
+
+      <span class="text-danger">
+
+            </span>
+    </div>
+    <div class="panel-body">
+
+      <form #f="ngForm" (ngSubmit)="onSaveClient(f.value)">
+        <div class="espace">
+          <mat-form-field class="example-container">
+            <input matInput placeholder="nom" type="text" name="userName" ngModel required="required">
+          </mat-form-field>
+          <!--<div class="alert alert-danger"
+                          *ngIf="f.controls['nom'].invalid && f.controls['nom'].touched || f.controls['nom'].dirty"> sssss</div>
+                      -->
+        </div>
+        <div class="espace">
+        <mat-form-field class="example-container">
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                 type="password" name="password" ngModel required="required">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+        <div class="espace">
+          <mat-form-field class="example-container">
+            <input matInput placeholder="Enter your re-password" [type]="hide ? 'password' : 'text'"
+                   type="password" name="confirmedPassword" ngModel required="required">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="espace">
+          <button type="submit" class="btn btn-success center-block">Inscrire</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br><br>
+</div>
