@@ -11,7 +11,7 @@ export class ProduitComponent implements OnInit {
 
 
   private listProduitsselected: any;
- public motCle: string;
+  public motCle: string;
   private title: string;
 
   constructor(public catService: CategorieService, public route: ActivatedRoute, public router: Router) {}

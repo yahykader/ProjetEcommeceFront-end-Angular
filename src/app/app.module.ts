@@ -16,6 +16,7 @@ import {FormControl, FormsModule} from '@angular/forms';
 import { AdminCatComponent } from './admin-cat/admin-cat.component';
 import { AdminProdComponent } from './admin-prod/admin-prod.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { AdminGestionComponent } from './admin-gestion/admin-gestion.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
     LoginComponent,
     AdminCatComponent,
     AdminProdComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    AdminGestionComponent
   ],
   imports: [
     BrowserModule,

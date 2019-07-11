@@ -2,36 +2,6 @@
 <mat-card class="spacer-card">
      <mat-card-title> {{title}}</mat-card-title>
 </mat-card>
-<!--
-<div class="container spacerhaut row" *ngIf="listProduitsselected">
-  <div *ngFor="let p of listProduitsselected._embedded.produits">
-     <div class="col-md-4 row esp">
-       <div class="panel panel-default">
-        <div class="panel-heading">{{p.nom}}</div>
-        <div class="panel-body">
-
-
-          <TABLE>
-            <TR>
-              <TD ROWSPAN=2><img src="{{this.catService.host+'/photoProduit/'+p.idProduit}}"></TD>
-              <TD COLSPAN=3 SPAN=2>Description {{p.description}}</TD>
-            </TR>
-            <TR>
-              <TD>Prix {{p.prix | number : '0.2'}}</TD>
-
-            </TR>
-            <tr>
-              <td></td>
-              <td><button type="submit" class="btn btn-success pull-right btn-sm">Ajouter au panier</button> </td> </tr>
-          </TABLE>
-
-
-        </div>
-
-
- </div></div></div></div>
--->
-
 
 <div class="container spacerhaut espace-bas row" *ngIf="listProduitsselected">
   <div *ngFor="let p of listProduitsselected._embedded.produits">

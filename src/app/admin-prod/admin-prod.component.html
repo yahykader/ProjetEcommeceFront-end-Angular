@@ -113,7 +113,7 @@
             <td>{{p.quantite}}</td><td>{{p.prix}}</td>
             <td>{{p.selected}}</td><td>{{p.disponible}}</td>
             <td>{{p.promotion}}</td><td>{{p.categorie}}</td>
-            <td>{{p.photo}}</td>
+            <td><img src="{{this.catService.host+'/photoProduit/'+p.idProduit}}" alt="Photo of a Shiba Inu"></td>
             <td>
               <button mat-flat-button color="warn" (click)="onDeleteProd(p)">Delete</button>
             </td>
