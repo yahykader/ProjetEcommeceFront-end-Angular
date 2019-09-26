@@ -1,7 +1,7 @@
 <mat-toolbar color="default" *ngIf="listCategories" class="spacerhaut">
   <mat-toolbar-row>
-    <button mat-button *ngFor="let c of listCategories._embedded.categories" (click)= "getProduitByCat(c)"
-             [ngClass]="this.currentCategorie==c?'active':''">
+    <button mat-raised-button *ngFor="let c of listCategories._embedded.categories" (click)= "getProduitByCat(c)"
+             [ngClass]="currentCategorie==c?'active':''">
        {{c.nomCategorie}}
     </button>
   </mat-toolbar-row>

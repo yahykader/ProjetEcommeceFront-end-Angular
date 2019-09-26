@@ -5,7 +5,7 @@
       <mat-card-title class="text-center"> Authentification</mat-card-title>
     </mat-card>
 
-
+<!--
     <div class="container espace">
 				    <span class="text-danger">
 				              Incorrect username  or password ?
@@ -14,21 +14,37 @@
             <span class="text-danger">
                            Vous avez été déconnecté
             </span>
-    </div>
+    </div>-->
     <div class="panel-body">
 
-      <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+      <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onLogin(f.value)">
         <div class="espace">
           <mat-form-field class="example-container">
-            <input matInput placeholder="Login" type="text" name="userName" ngModel="" required="required">
+            <input matInput placeholder="Login"
+                   type="text" name="userName"
+                   [(ngModel)]="model.userName"
+                   #userName="ngModel"
+                   [ngClass]="{'is-invalid':f.submitted && userName.invalid}"
+                   required/>
+            <div *ngIf="f.submitted && userName.invalid" class="invalid-input"></div>
+
           </mat-form-field>
+          <div *ngIf="userName.errors?.required" class="invalid-input"> UserName is invalid</div>
         </div>
         <div class="espace">
         <mat-form-field class="example-container">
-          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
-                 type="password" name="password" ngModel="" required="required">
+          <input matInput placeholder="Enter your password"
+                 [type]="hide ? 'password' : 'text'"
+                 type="password" name="password"
+                 [(ngModel)]="model.password"
+                 #password="ngModel"
+                 [ngClass]="{'is-invalid':f.submitted && password.invalid}"
+                 required/>
+          <div *ngIf="f.submitted && password.invalid" class="invalid-input"></div>
+
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
+          <div *ngIf="password.errors?.required" class="invalid-input"> password is invalid</div>
         </div>
         <div class="espace">
           <button type="submit" class="btn btn-success center-block">Authentifier</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-gestion',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminGestionComponent implements OnInit {
 
-  constructor() { }
+
+  activeLinkIndex = -1;
+
+  constructor(public router: Router, public route: ActivatedRoute) {
+  }
+
+  routes = [
+    {linkName: 'Gérer Catégorie ', url1: 'adminCat'},
+    {linkName: 'Gérer Produit', url1: 'adminProd'},
+  ]
 
   ngOnInit() {
+
+    this.router.events.subscribe((res) => {
+      this.activeLinkIndex = this.routes.indexOf(this.routes.find(tab => tab.linkName === '.' + this.router.url));
+    });
+
   }
 
 }

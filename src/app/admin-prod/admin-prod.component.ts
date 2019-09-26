@@ -23,6 +23,7 @@ export class AdminProdComponent implements OnInit {
     this.catService.getRessource("/produits")
       .subscribe(data => {
         this.listProduits = data;
+        console.log(data);
         this.mode = 'list';
       }, err => {
         console.log(err);
@@ -65,4 +66,30 @@ export class AdminProdComponent implements OnInit {
     console.log(data);
   }
 
+
+  public onUpdateProduit(data) {
+    let url = this.currentproduit._links.self.href;
+    this.catService.putRessource(url, data)
+      .subscribe(data => {
+        this.mode = 'list';
+        this.onGetAllProduits();
+      }, err => {
+        console.log(err);
+      });
+    console.log(data);
+  }
+
+  public currentproduit;
+
+  public onEditProduit(prod) {
+
+    let url = prod._links.self.href;
+    this.catService.getR(url)
+      .subscribe(data => {
+        this.currentproduit = data;
+        this.mode = 'editProduit';
+      }, err => {
+        console.log(err);
+      });
+  }
 }

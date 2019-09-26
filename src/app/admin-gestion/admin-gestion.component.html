@@ -1,3 +1,10 @@
-<p>
-  admin-gestion works!
-</p>
+<mat-toolbar color="default" class="spacerhaut" >Espace Admin, Gérer Les Catégories et les Produits </mat-toolbar>
+<nav mat-tab-nav-bar class="spacerht">
+  <a mat-tab-link
+     *ngFor="let route of routes"
+     [routerLink]="route.url1" routerLinkActive ="active">{{route.linkName}}
+  </a>
+</nav>
+
+<router-outlet></router-outlet>
+

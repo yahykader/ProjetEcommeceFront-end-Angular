@@ -9,6 +9,10 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  model: FeedbackViewModel = {
+    userName: '',
+    password: ''
+  };
   constructor( public authService: AuthentificationService, public router: Router) { }
 
   ngOnInit() {
@@ -22,9 +26,13 @@ export class LoginComponent implements OnInit {
         //console.log(resp.headers.get('Authorization'));
         let jwt = resp.headers.get('Authorization');
         this.authService.saveToken(jwt);
-        this.router.navigateByUrl('/adminProd');
+        this.router.navigateByUrl('/adminCat');
       },err=>{
         console.log(err);
       });
   }
+}
+export interface FeedbackViewModel {
+  userName: string;
+  password: string;
 }

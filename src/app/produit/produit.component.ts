@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CategorieService} from '../categorie.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {AuthentificationService} from "../authentification.service";
 
 @Component({
   selector: 'app-produit',
@@ -13,63 +15,93 @@ export class ProduitComponent implements OnInit {
   private listProduitsselected: any;
   public motCle: string;
   private title: string;
-
-  constructor(public catService: CategorieService, public route: ActivatedRoute, public router: Router) {}
+  public editPhoto: boolean;
+  public currentProduit: any;
+  private selectedFile: any;
+  public progress: number;
+  private currentFileUpload: any;
+  private timestamp:number=0;
+  constructor(public catService: CategorieService, public authService: AuthentificationService,public route: ActivatedRoute, public router: Router) {
+  }
 
   ngOnInit() {
 
-    this.router.events.subscribe((val)=> {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        let url =val.url;
+        let url = val.url;
         console.log(url);
 
-        let p1 = this .route.snapshot.params.p1;
-        if (p1 == 1 ) {
-          this.title ="Les Produits Selectionées  ";
+        let p1 = this.route.snapshot.params.p1;
+        if (p1 == 1) {
+          this.title = "Les Produits Selectionées  ";
           this.getProduits('/produits/search/selectedProduit');
-        }
-        else
-        if (p1 == 2) {
+        } else if (p1 == 2) {
           let idCategorie = this.route.snapshot.params.p2;
-          this.title ="Les Produits de la Categorié ";
-          this.getProduits('/categories/'+idCategorie+'/produits');
-        }
-        else if (p1 == 3) {
-          this.title ="Les Produits en Promotions ";
+          this.title = "Les Produits de la Categorié ";
+          this.getProduits('/categories/' + idCategorie + '/produits');
+        } else if (p1 == 3) {
+          this.title = "Les Produits en Promotions ";
           this.getProduits('/produits/search/promotionProduit');
-        }
-        else if (p1 == 4) {
-          this.title ="Les Produits Disponbles ";
+        } else if (p1 == 4) {
+          this.title = "Les Produits Disponbles ";
           this.getProduits('/produits/search/disponibleProduit');
-        }
-        else if (p1 == 5) {
-          this.title ="Recherche du produit  ";
+        } else if (p1 == 5) {
+          this.title = "Recherche du produit  ";
           //this.getProduits('/produits/search/cherchermotCle&mc='+motCle);
           this.onGetProduitByMCle(this.motCle);
         }
       }
     });
 
-    let p1 = this .route.snapshot.params.p1;
-    if (p1 == 1 ) {
-      this.title ="Les Produits Selectionées  ";
+    let p1 = this.route.snapshot.params.p1;
+    if (p1 == 1) {
+      this.title = "Les Produits Selectionées  ";
       this.getProduits('/produits/search/selectedProduit');
     }
 
   }
+
   private onGetProduitByMCle(motCle) {
-    let url = this.catService.host + "/produits/search/cherchermotCle?mc="+motCle;
-       this.getProduits(url);
+    let url = this.catService.host + "/produits/search/cherchermotCle?mc=" + motCle;
+    this.getProduits(url);
   }
 
 
   private getProduits(url) {
     this.catService.getRessource(url)
-      .subscribe(data=> {
-         this.listProduitsselected = data;
-      },err => {
-         console.log(err);
+      .subscribe(data => {
+        this.listProduitsselected = data;
+      }, err => {
+        console.log(err);
       });
   }
 
+  private onEditPhoto(p) {
+    this.currentProduit = p;
+    this.editPhoto = true;
+  }
+
+  private onSelectedFile(event) {
+    this.selectedFile = event.target.files;
+  }
+
+  private upLoadPhoto() {
+    this.progress = 0;
+    this.currentFileUpload = this.selectedFile.item(0);
+    this.catService.uploadPhotoProduit(this.currentFileUpload, this.currentProduit.idProduit).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+           this.progress = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+          alert("bien de chargement");
+          this.timestamp=Date.now();
+      }
+    }, err => {
+          alert("Problème de chargement");
+    })
+        this.selectedFile=undefined
+  }
+
+  getTS() {
+    return this.timestamp;
+  }
 }

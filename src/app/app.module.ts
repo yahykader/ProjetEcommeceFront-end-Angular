@@ -6,13 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import { MenuComponent } from './menu/menu.component';
-import {MatIconModule, MatInputModule} from '@angular/material';
+import {MatIconModule, MatInputModule, MatTabsModule} from '@angular/material';
 import { CategorieComponent } from './categorie/categorie.component';
 import { FooterComponent } from './footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ProduitComponent } from './produit/produit.component';
 import { LoginComponent } from './login/login.component';
-import {FormControl, FormsModule} from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AdminCatComponent } from './admin-cat/admin-cat.component';
 import { AdminProdComponent } from './admin-prod/admin-prod.component';
 import { InscriptionComponent } from './inscription/inscription.component';
@@ -35,9 +35,10 @@ import { AdminGestionComponent } from './admin-gestion/admin-gestion.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MaterialModule,
     MatIconModule, FormsModule,
-    HttpClientModule, MatInputModule
+    HttpClientModule, MatInputModule, MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

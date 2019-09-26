@@ -78,20 +78,66 @@
          </div>
        </form>
    </div>
-    <!--pour modifier categories&ndash;&gt;
-   <div *ngIf="mode=='editCategorie'" class="col-md-6">
-     <form #f="ngForm" (ngSubmit)="onUpdateCategorie(f.value)">
-       <div class="form-group">
+    <!--pour modifier produit-->
+   <div *ngIf="mode=='editProduit'" class="col-md-6">
+     <form #f="ngForm" (ngSubmit)="onUpdateProduit(f.value)">
+
+       <div class="espace">
+         <mat-form-field class="example-full-width">
+           <input matInput placeholder="nom produit" type="text" name="nom" ngModel="" [(ngModel)]="currentproduit.nom" required="required">
+         </mat-form-field>
+       </div>
+       <mat-form-field class="example-full-width">
+         <textarea matInput placeholder="Description produit " type="text" name="description" ngModel="" [(ngModel)]="currentproduit.description"
+                                                    required="required"></textarea>
+       </mat-form-field>
+
+
+       <table class="example-full-width" cellspacing="0">
+         <tr>
+           <td>
+             <mat-form-field class="example-full-width">
+               <input matInput placeholder="quantité" type="number" name="quantite" ngModel  [(ngModel)]="currentproduit.quantite" required="required">
+             </mat-form-field>
+           </td>
+           <td>
+             <mat-form-field class="example-full-width">
+               <input matInput placeholder="prix" type="text" name="prix" ngModel  [(ngModel)]="currentproduit.prix" required="required">
+             </mat-form-field>
+           </td>
+         </tr>
+       </table>
+       <table class="example-full-width" cellspacing="0">
+         <tr>
+           <td>
+             <section class="example-section">
+               <mat-checkbox class="example-margin"  type="chekbox" [(ngModel)]="currentproduit.selected" [value]="" >Selected</mat-checkbox>
+             </section>
+           </td>
+           <td>
+             <section class="example-section">
+               <mat-checkbox class="example-margin" [(ngModel)]="currentproduit.promotion" [value]="" >Promotion</mat-checkbox>
+             </section>
+           </td>
+           <td>
+             <section class="example-section">
+               <mat-checkbox class="example-margin" [(ngModel)]="currentproduit.disponible" [value]="" >Disponible</mat-checkbox>
+             </section>
+           </td>
+         </tr>
+       </table>
+
+   <!--    <div class="form-group">
          <label class="control-label"> Nom Categorie </label>
          <input type="text" name="nomCategorie" class="form-control" ngModel [(ngModel)]="currentcategorie.nomCategorie">
        </div>
        <div class="form-group">
          <label class="control-label"> Description </label>
          <input type="text" name="description" class="form-control" ngModel [(ngModel)]="currentcategorie.description">
-       </div>
+       </div>-->
        <button type="submit" class=" btn btn-success"> Modifier </button>
      </form>
-   </div>-->
+   </div>
 
     <div  class="container"*ngIf="mode == 'list'">
       <div class="row col-md-6">
@@ -112,8 +158,8 @@
             <td>{{p.nom}}</td><td>{{p.description}}</td>
             <td>{{p.quantite}}</td><td>{{p.prix}}</td>
             <td>{{p.selected}}</td><td>{{p.disponible}}</td>
-            <td>{{p.promotion}}</td><td>{{p.categorie}}</td>
-            <td><img src="{{this.catService.host+'/photoProduit/'+p.idProduit}}" alt="Photo of a Shiba Inu"></td>
+            <td>{{p.promotion}}</td><td>{{p}}</td>
+            <td><img height="100" src="{{this.catService.host+'/photoProduit/'+p.idProduit}}"></td>
             <td>
               <button mat-flat-button color="warn" (click)="onDeleteProd(p)">Delete</button>
             </td>

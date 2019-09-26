@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthentificationService} from './authentification.service';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +42,16 @@ export class CategorieService {
   }
 
 
+  public uploadPhotoProduit(file: File, idProduit): Observable<HttpEvent<{}>> {
+      let formdata: FormData = new FormData();
+      formdata.append('file', file);
+     if(this.authService.jwt==null) this.authService.loadToken();
+      const req = new HttpRequest('POST', this.host+'/uploadPhoto/'+idProduit, formdata, {
+        reportProgress: true,
+        responseType: 'text',
+        headers: new HttpHeaders({'Authorization':this.authService.jwt})
+    });
+
+    return this.http.request(req);
+  }
 }
