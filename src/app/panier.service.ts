@@ -27,7 +27,7 @@ export class PanierService {
     let produitItem:ItemProduit=panier.items.get(produit.idProduit);// recuperer et verifier si le produit exist dans le panier
 
     if(produitItem){
-      produitItem.quantity+=produit.quantity;
+       produitItem.quantity+=produit.quantity;
     }else {
        produitItem=new ItemProduit();
        produitItem.prix=produit.prix;
