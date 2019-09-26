@@ -3,6 +3,7 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/h
 import {Router} from '@angular/router';
 import {AuthentificationService} from './authentification.service';
 import {Observable} from "rxjs";
+import {Produit} from "./model/Produit.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,13 @@ export class CategorieService {
   constructor( private http: HttpClient, private authService: AuthentificationService) { }
 
   public  getRessource(url) {
-
       return this.http.get(this.host + url);
   }
   public getR(url) {
-
     return this.http.get(url);
+  }
+  public getProduit(url):Observable<Produit> {
+    return this.http.get<Produit>(url);
   }
 
 
@@ -39,6 +41,10 @@ export class CategorieService {
   public patchRessource(url,data) {
     let headers = new HttpHeaders({'Authorization':'Bearer '+this.authService.jwt})
     return this.http.patch(url,data, {'headers': headers});
+  }
+  public patchRess(url,data):Observable<Produit> {
+    //let headers = new HttpHeaders({'Authorization':'Bearer '+this.authService.jwt})
+    return this.http.patch<Produit>(url,data);
   }
 
 

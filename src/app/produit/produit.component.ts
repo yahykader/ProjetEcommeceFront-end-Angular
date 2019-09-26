@@ -3,6 +3,7 @@ import {CategorieService} from '../categorie.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {AuthentificationService} from "../authentification.service";
+import {Produit} from "../model/Produit.model";
 
 @Component({
   selector: 'app-produit',
@@ -21,6 +22,7 @@ export class ProduitComponent implements OnInit {
   public progress: number;
   private currentFileUpload: any;
   private timestamp:number=0;
+
   constructor(public catService: CategorieService, public authService: AuthentificationService,public route: ActivatedRoute, public router: Router) {
   }
 
@@ -107,5 +109,10 @@ export class ProduitComponent implements OnInit {
 
   public onAddProductToCaddy(currentProduit: any) {
 
+  }
+
+  public onProductDetails(p: Produit) {
+     let url=btoa(p._links.produit.href);
+     this.router.navigateByUrl("produit-detail/"+url);
   }
 }
