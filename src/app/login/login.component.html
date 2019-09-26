@@ -26,6 +26,7 @@
                    #userName="ngModel"
                    [ngClass]="{'is-invalid':f.submitted && userName.invalid}"
                    required/>
+
             <div *ngIf="f.submitted && userName.invalid" class="invalid-input"></div>
 
           </mat-form-field>

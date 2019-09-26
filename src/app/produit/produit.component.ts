@@ -101,7 +101,11 @@ export class ProduitComponent implements OnInit {
         this.selectedFile=undefined
   }
 
-  getTS() {
+  public getTS() {
     return this.timestamp;
+  }
+
+  public onAddProductToCaddy(currentProduit: any) {
+
   }
 }

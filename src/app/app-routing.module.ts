@@ -6,6 +6,7 @@ import {AdminCatComponent} from './admin-cat/admin-cat.component';
 import {AdminProdComponent} from './admin-prod/admin-prod.component';
 import {InscriptionComponent} from './inscription/inscription.component';
 import {AdminGestionComponent} from "./admin-gestion/admin-gestion.component";
+import {ProduitDetailComponent} from "./produit-detail/produit-detail.component";
 
 const routes: Routes = [
   {path : 'produits/:p1/:p2' , component : ProduitComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path :'inscrire' , component : InscriptionComponent},
   {path :'adminCat' , component : AdminCatComponent},
   {path :'adminProd' , component : AdminProdComponent},
+  {path :'produit-detail/:url' , component : ProduitDetailComponent},
  // {path:'gestionadmin', component:AdminGestionComponent,
     /*children: [
       {path :'adminCat' , component : AdminCatComponent},
