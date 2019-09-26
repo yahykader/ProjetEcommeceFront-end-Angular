@@ -39,7 +39,9 @@
     </form>
 
     <button mat-button routerLink="/inscrire" ><mat-icon class="glyphicon glyphicon-user" ></mat-icon> S'inscrire</button>
-    <button mat-button><span class="glyphicon glyphicon-shopping-cart"></span> Panier</button>
+    <button mat-button><span class="glyphicon glyphicon-shopping-cart"></span>
+        {{panierService.getCurrentPanier().name}} | {{panierService.getCurrentPanier().items.size}}
+    </button>
 
     <button mat-button  *ngIf="!isAuthenticated()" routerLink="/login">
        <mat-icon class="glyphicon glyphicon-log-in"></mat-icon> Login

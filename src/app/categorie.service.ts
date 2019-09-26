@@ -42,11 +42,14 @@ export class CategorieService {
     let headers = new HttpHeaders({'Authorization':'Bearer '+this.authService.jwt})
     return this.http.patch(url,data, {'headers': headers});
   }
-  public patchRess(url,data):Observable<Produit> {
-    //let headers = new HttpHeaders({'Authorization':'Bearer '+this.authService.jwt})
-    return this.http.patch<Produit>(url,data);
+  public patchProduit(url,data):Observable<Produit> {
+    let headers = new HttpHeaders({'Authorization':'Bearer '+this.authService.jwt})
+    return this.http.patch<Produit>(url,data,{'headers': headers});
   }
-
+  public putProduit(url,data):Observable<Produit> {
+    let headers = new HttpHeaders({'Authorization':'Bearer '+this.authService.jwt})
+    return this.http.patch<Produit>(url,data,{'headers': headers});
+  }
 
   public uploadPhotoProduit(file: File, idProduit): Observable<HttpEvent<{}>> {
       let formdata: FormData = new FormData();

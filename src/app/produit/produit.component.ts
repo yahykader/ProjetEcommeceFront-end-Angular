@@ -4,6 +4,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {AuthentificationService} from "../authentification.service";
 import {Produit} from "../model/Produit.model";
+import {PanierService} from "../panier.service";
 
 @Component({
   selector: 'app-produit',
@@ -23,7 +24,8 @@ export class ProduitComponent implements OnInit {
   private currentFileUpload: any;
   private timestamp:number=0;
 
-  constructor(public catService: CategorieService, public authService: AuthentificationService,public route: ActivatedRoute, public router: Router) {
+  constructor(public catService: CategorieService, public authService: AuthentificationService,
+              public route: ActivatedRoute, public router: Router,public panierService:PanierService) {
   }
 
   ngOnInit() {
@@ -107,8 +109,8 @@ export class ProduitComponent implements OnInit {
     return this.timestamp;
   }
 
-  public onAddProductToCaddy(currentProduit: any) {
-
+  public onAddProductToCaddy(p:Produit) {
+      this.panierService.addProduitToPanier(p);
   }
 
   public onProductDetails(p: Produit) {

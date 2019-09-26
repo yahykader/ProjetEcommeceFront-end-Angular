@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthentificationService} from '../authentification.service';
 import {CategorieService} from '../categorie.service';
+import {PanierService} from "../panier.service";
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +14,8 @@ export class MenuComponent implements OnInit {
   private listProduitsselected: any;
   public motCle: any;
 
-  constructor( private router: Router, public authService: AuthentificationService, public catService: CategorieService) { }
+  constructor( private router: Router, public authService: AuthentificationService,
+               public catService: CategorieService,public panierService:PanierService) { }
 
   ngOnInit() {
     this.authService.loadToken();

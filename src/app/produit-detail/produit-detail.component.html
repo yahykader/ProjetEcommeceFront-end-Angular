@@ -1,13 +1,12 @@
 <div *ngIf="currentProduit">
   <div class="panel panel-default" *ngIf="mode==0">
     <div class="panel-heading">Fiche Produit : {{currentProduit.nom}}
-      <span class="glyphicon glyphicon-edit pull-right btn" (click)="onEditProduct()"></span>
+      <span class="glyphicon glyphicon-edit pull-right btn" *ngIf="authService.isAuthenticated()" (click)="onEditProduct()"></span>
     </div>
     <div class="panel-body">
       <div class="col-md-5">
         <img class="img-thumbnail"  src="{{this.catService.host+'/photoProduit/'+currentProduit.idProduit+'?ts='+getTS()}}"/>
-<!--        <div *ngIf="this.authService.isAdmin()">-->
-          <div>
+           <div *ngIf="authService.isAuthenticated()">
           <button *ngIf="!editPhoto" (click)="onEditPhoto(currentProduit)">
             <span class="glyphicon glyphicon-edit"></span>
           </button>

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CategorieService} from "../categorie.service";
 import {Produit} from "../model/Produit.model";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {AuthentificationService} from "../authentification.service";
 
 @Component({
   selector: 'app-produit-detail',
@@ -20,7 +21,8 @@ export class ProduitDetailComponent implements OnInit {
   private currentFileUpload: any;
   private timestamp:number=0;
 
-  constructor(private router:Router,private route:ActivatedRoute,public catService: CategorieService) { }
+  constructor(private router:Router,private route:ActivatedRoute,
+              public catService: CategorieService,public authService: AuthentificationService,) { }
 
   ngOnInit() {
     let url= atob(this.route.snapshot.params.url);
@@ -70,7 +72,7 @@ export class ProduitDetailComponent implements OnInit {
 
   public onUpdateProduct(data){
     let url=this.currentProduit._links.self.href;
-    this.catService.patchRess(url,data)
+    this.catService.putProduit(url,data)
       .subscribe(d=>{
         this.currentProduit=d;
         this.mode=0;
