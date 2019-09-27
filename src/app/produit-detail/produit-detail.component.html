@@ -1,4 +1,4 @@
-<div *ngIf="currentProduit">
+<div *ngIf="currentProduit" class="spacerhaut">
   <div class="panel panel-default" *ngIf="mode==0">
     <div class="panel-heading">Fiche Produit : {{currentProduit.nom}}
       <span class="glyphicon glyphicon-edit pull-right btn" *ngIf="authService.isAuthenticated()" (click)="onEditProduct()"></span>
@@ -20,15 +20,15 @@
         </div>
 
         <div>
-        <span *ngIf="currentProduit.promotion">
+          <span *ngIf="currentProduit.promotion">
                 <img src="assets/images/promo.png" class="img-thumbnail img-circle" height="30">
-              </span>
+           </span>
           <span *ngIf="currentProduit.selected">
                 <img src="assets/images/favorite.png" class="img-thumbnail img-circle" height="30">
               </span>
           <span *ngIf="currentProduit.disponible">
                 <img src="assets/images/available.png" class="img-thumbnail img-circle"  height="30">
-              </span>
+          </span>
         </div>
         <div>
           <form #f="ngForm" (ngSubmit)="onAddProductToCaddy(currentProduit)">
@@ -57,7 +57,7 @@
     <form #f="ngForm" (ngSubmit)="onUpdateProduct(f.value)">
       <div class="form-group">
         <label class="control-label">Name:</label>
-        <input type="text" name="name" ngModel [(ngModel)]="currentProduit.nom" class="form-control">
+        <input type="text" name="nom" ngModel [(ngModel)]="currentProduit.nom" class="form-control">
       </div>
       <div class="form-group">
         <label class="control-label">Description:</label>
@@ -65,7 +65,7 @@
       </div>
       <div class="form-group">
         <label class="control-label">Price:</label>
-        <input type="text" name="currentPrice" ngModel [(ngModel)]="currentProduit.prix" class="form-control">
+        <input type="text" name="prix" ngModel [(ngModel)]="currentProduit.prix" class="form-control">
       </div>
       <div class="form-group">
         <label class="control-label">Promotion:</label>
@@ -77,7 +77,7 @@
       </div>
       <div class="form-group">
         <label class="control-label">Available:</label>
-        <input type="checkbox" name="available" ngModel [(ngModel)]="currentProduit.disponible" >
+        <input type="checkbox" name="disponible" ngModel [(ngModel)]="currentProduit.disponible" >
       </div>
       <button class="btn btn-success" type="submit">Update</button>
     </form>
