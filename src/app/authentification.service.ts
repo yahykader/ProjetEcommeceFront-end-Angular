@@ -57,7 +57,6 @@ export class AuthentificationService {
   public loadToken() {
     this.jwt = localStorage.getItem('token');
     this.parseJWT();
-
   }
   public onLogout() {
     localStorage.removeItem('token');

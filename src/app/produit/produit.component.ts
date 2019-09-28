@@ -25,7 +25,7 @@ export class ProduitComponent implements OnInit {
   private timestamp:number=0;
 
   constructor(public catService: CategorieService, public authService: AuthentificationService,
-              public route: ActivatedRoute, public router: Router,public panierService:PanierService) {
+              public route: ActivatedRoute, public router: Router, public panierService:PanierService) {
   }
 
   ngOnInit() {

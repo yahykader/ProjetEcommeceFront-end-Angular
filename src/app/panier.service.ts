@@ -13,36 +13,54 @@ export class PanierService {
 
 
   constructor() {
-    let paniers=localStorage.getItem("myPanier");
+   let paniers=localStorage.getItem('myPanier');
     if(paniers){
-       this.paniers=JSON.parse(paniers);
+      this.paniers=JSON.parse(paniers);
     }else {
       let panier=new Panier(this.currentPanierName);
       this.paniers[this.currentPanierName]=panier;
+     // this.paniers.set(this.currentPanierName,panier);
     }
-  }
-
-  public addProduitToPanier(produit:Produit){
-    let panier=this.paniers.get(this.currentPanierName);// recuperer le panier qu'on va dans l'ajouter
-    let produitItem:ItemProduit=panier.items.get(produit.idProduit);// recuperer et verifier si le produit exist dans le panier
-
-    if(produitItem){
-       produitItem.quantity+=produit.quantity;
+   // let panier=new Panier(this.currentPanierName);
+   // this.paniers.set(this.currentPanierName,panier);
+    /* let paniers=localStorage.getItem("myPanier");
+    //this.paniers=JSON.parse(paniers);
+    console.log(paniers);
+   if(paniers){
+       this.paniers=JSON.parse(paniers);
     }else {
-       produitItem=new ItemProduit();
-       produitItem.prix=produit.prix;
-       produitItem.quantity=produit.quantity;
-       produitItem.produit=produit;
-       panier.items.set(produit.idProduit,produitItem);
+      let panier=new Panier(this.currentPanierName);
+      this.paniers.set(this.currentPanierName,panier)
+    }*/
+  }
+
+  public addProduitToPanier(produit:Produit):void{
+       this.addProductToPanier(produit);
        this.savePaniers();
-    }
   }
 
-  public getCurrentPanier():Panier{
-    return this.paniers.get(this.currentPanierName);
+  private addProductToPanier(produit:Produit):void{
+      let panier=this.paniers.get(this.currentPanierName);// recuperer le panier qu'on va dans l'ajouter
+      let produitItem:ItemProduit=panier.items.get(produit.idProduit);// recuperer et verifier si le produit exist dans le panier
+
+      if(produitItem){
+        produitItem.quantity+=produit.quantity;
+      }else {
+        produitItem = new ItemProduit();
+        produitItem.prix = produit.prix;
+        produitItem.quantity = produit.quantity;
+        produitItem.produit = produit;
+        panier.items.set(produit.idProduit, produitItem);
+      }
+  }
+  public savePaniers(){
+    localStorage.setItem('myPanier',JSON.stringify(this.paniers));
+  }
+  public getCurrentPanier(){
+      return this.paniers.get(this.currentPanierName);
   }
 
-  public getTotal():number{
+  public getTotalPrix():number{
     let total =0;
     let panier:IterableIterator<ItemProduit>=this.getCurrentPanier().items.values();
     console.log(panier);
@@ -50,9 +68,19 @@ export class PanierService {
       total+=pi.prix*pi.quantity;
     }
     return  total;
+    console.log(total);
   }
 
-  public savePaniers(){
-    localStorage.setItem("myPanier",JSON.stringify(this.paniers));
+  public getTotalQuantite():number{
+    let total =0;
+    let panier:IterableIterator<ItemProduit>=this.getCurrentPanier().items.values();
+    console.log(panier);
+    for(let pi of panier){
+      total+=pi.quantity;
+    }
+    return  total;
+    console.log(total);
   }
+
+
 }

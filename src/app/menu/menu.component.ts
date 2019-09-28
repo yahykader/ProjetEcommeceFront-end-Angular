@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthentificationService} from '../authentification.service';
 import {CategorieService} from '../categorie.service';
 import {PanierService} from "../panier.service";
+import {Produit} from "../model/Produit.model";
 
 @Component({
   selector: 'app-menu',
@@ -13,12 +14,17 @@ export class MenuComponent implements OnInit {
   public currentCategorie ;
   private listProduitsselected: any;
   public motCle: any;
+  public p:Produit;
 
   constructor( private router: Router, public authService: AuthentificationService,
-               public catService: CategorieService,public panierService:PanierService) { }
+               public catService: CategorieService,public panierService:PanierService) {
+
+
+  }
 
   ngOnInit() {
-    this.authService.loadToken();
+      //this.authService.loadToken();
+      //this.panierService.getCurrentPanier();
   }
   public onSelectedProduit() {
     this.currentCategorie = undefined;

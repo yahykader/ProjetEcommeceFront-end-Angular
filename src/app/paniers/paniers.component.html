@@ -1,4 +1,4 @@
-<div class="panel panel-default" *ngIf="panierService.getCurrentPanier().items">
+<div class="panel panel-default spacerhaut" > <!--*ngIf="panierService.getCurrentPanier().items"-->
   <div class="panel-heading">{{panierService.getCurrentPanier().name}}
   </div>
   <div class="panel-body">
@@ -6,7 +6,7 @@
       <tr>
         <th>ID</th><th>Name</th><th>Quantity</th><th>Price</th><th>Supprimer</th>
       </tr>
-      <tr *ngFor="let pi of panierService.getCurrentPanier().items.values()">
+      <tr  *ngFor="let pi of panierService.getCurrentPanier().items.values()">
         <td>{{pi.produit.idProduit}}</td>
         <td>{{pi.produit.nom}}</td>
         <td>{{pi.quantity|number:'0.2'}}</td>
@@ -18,8 +18,10 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3">Total</td>
-        <td>{{panierService.getTotal()|number:'0.2'}}</td>
+        <td colspan="2">Total</td>
+        <td>{{panierService.getTotalQuantite()}} article</td>
+        <td>{{panierService.getTotalPrix()|number:'0.2'}}</td>
+        <td></td>
       </tr>
     </table>
     <button class="btn btn-success" (click)="onNewOrder()">Commander</button>

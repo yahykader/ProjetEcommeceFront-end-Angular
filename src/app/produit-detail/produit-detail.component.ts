@@ -25,10 +25,14 @@ export class ProduitDetailComponent implements OnInit {
               public catService: CategorieService,public authService: AuthentificationService,) { }
 
   ngOnInit() {
+     this.getDetails();
+  }
+
+  public getDetails(){
     let url= atob(this.route.snapshot.params.url);
     console.log(url);
-    this.catService.getProduit(url).subscribe(data=>{
-       this.currentProduit=data;
+      this.catService.getProduit(url).subscribe(data=>{
+      this.currentProduit=data;
     },error1 => console.log("produit introuvable !!!"))
   }
 
@@ -72,7 +76,7 @@ export class ProduitDetailComponent implements OnInit {
 
   public onUpdateProduct(data){
     let url=this.currentProduit._links.self.href;
-    this.catService.putProduit(url,data)
+    this.catService.patchProduit(url,data)
       .subscribe(d=>{
         this.currentProduit=d;
         this.mode=0;

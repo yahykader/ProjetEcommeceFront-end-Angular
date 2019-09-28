@@ -11,6 +11,7 @@ export class PaniersComponent implements OnInit {
   constructor(public panierService:PanierService) { }
 
   ngOnInit() {
+    //this.panierService.savePaniers();
   }
 
   public onRemoveProductFromPanier(value: any) {
